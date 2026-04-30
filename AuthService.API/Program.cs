@@ -5,6 +5,7 @@ using AuthService.Infrastructure;
 using AuthService.Infrastructure.Persistence;
 using AuthService.Infrastructure.Persistence.DbContext;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -45,6 +46,12 @@ builder.Services.AddInfrastructure(builder.Configuration);
 var app = builder.Build();
 
 // -------------------- SEED ADMIN USER --------------------
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AuthDbContext>();
+    await db.Database.MigrateAsync();
+}
 
 if (app.Environment.IsDevelopment())
 {
