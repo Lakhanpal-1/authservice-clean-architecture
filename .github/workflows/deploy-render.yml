@@ -1,0 +1,27 @@
+name: Deploy Production
+
+on:
+  workflow_run:
+    workflows:
+      - Publish Docker Image
+    types:
+      - completed
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Trigger Render deploy
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger deploy hook
+        if: ${{ secrets.RENDER_DEPLOY_HOOK_URL != '' }}
+        run: curl -fsS -X POST "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"
+
+      - name: Missing deploy hook
+        if: ${{ secrets.RENDER_DEPLOY_HOOK_URL == '' }}
+        run: |
+          echo "RENDER_DEPLOY_HOOK_URL is not configured."
+          echo "Create a Render deploy hook and add it as a GitHub repository secret."
+          exit 1

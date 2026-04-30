@@ -1,15 +1,18 @@
-name: Build
+name: CI
 
 on:
   push:
     branches:
       - main
+      - public-main
+      - main-redesign
   pull_request:
     branches:
       - main
 
 jobs:
   build:
+    name: Restore and build
     runs-on: ubuntu-latest
 
     steps:
@@ -26,3 +29,6 @@ jobs:
 
       - name: Build
         run: dotnet build AuthService.API/AuthService.API.csproj --configuration Release --no-restore
+
+      - name: Publish check
+        run: dotnet publish AuthService.API/AuthService.API.csproj --configuration Release --no-build --output ./publish-check

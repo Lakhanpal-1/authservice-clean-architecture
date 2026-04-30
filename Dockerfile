@@ -14,8 +14,8 @@ RUN dotnet publish AuthService.API/AuthService.API.csproj -c Release -o /app/pub
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
 WORKDIR /app
 
-ENV ASPNETCORE_URLS=http://+:8080
-EXPOSE 8080
+ENV ASPNETCORE_URLS=http://0.0.0.0:10000
+EXPOSE 10000
 
 COPY --from=build /app/publish .
 ENTRYPOINT ["dotnet", "AuthService.API.dll"]

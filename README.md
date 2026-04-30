@@ -88,7 +88,7 @@ docker build -t authservice .
 Run the API:
 
 ```powershell
-docker run -p 8080:8080 `
+docker run -p 10000:10000 `
   -e ConnectionStrings__DefaultConnection="Host=<host>;Port=5432;Database=auth_db;Username=<user>;Password=<password>" `
   -e Jwt__Key="<strong-secret-key>" `
   -e Jwt__Issuer="AuthService" `
@@ -99,12 +99,12 @@ docker run -p 8080:8080 `
 The API will be available at:
 
 ```text
-http://localhost:8080/swagger
+http://localhost:10000/swagger
 ```
 
 ## Deployment Notes
 
-This service can be deployed to platforms that support Docker or .NET apps, such as Azure App Service, Render, Railway, Fly.io, or a VPS. Use managed PostgreSQL for production, configure secrets in the platform dashboard, and run EF Core migrations during release or startup automation.
+This service can be deployed to platforms that support Docker or .NET apps. For a free portfolio deployment, use Render Free Web Service with Supabase Postgres. See `DEPLOYMENT.md` for the CI/CD branch flow and production setup.
 
 ## Repository Owner
 
