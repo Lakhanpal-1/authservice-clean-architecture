@@ -56,14 +56,11 @@ if (app.Environment.IsDevelopment())
 
 // -------------------- MIDDLEWARE --------------------
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
+app.UseSwagger();
+app.UseSwaggerUI();
 
-    app.MapGet("/", () => Results.Redirect("/swagger"))
-       .ExcludeFromDescription();
-}
+app.MapGet("/", () => Results.Redirect("/swagger"))
+   .ExcludeFromDescription();
 
 app.UseHttpsRedirection();
 app.UseMiddleware<ExceptionMiddleware>();
