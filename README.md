@@ -34,6 +34,8 @@ The solution is organized into focused layers:
 
 ## Getting Started
 
+For full local developer setup instructions, including Docker Compose, see `DEVELOPER_SETUP.md`.
+
 ### Prerequisites
 
 - .NET 10 SDK
@@ -78,6 +80,18 @@ https://localhost:<port>/swagger
 | `POST` | `/api/auth/login` | Authenticate a user and return a JWT |
 
 ## Docker Deployment
+
+For local development with API and PostgreSQL together:
+
+```powershell
+docker compose up --build
+```
+
+Then open:
+
+```text
+http://localhost:10000/swagger
+```
 
 Build the container image:
 
