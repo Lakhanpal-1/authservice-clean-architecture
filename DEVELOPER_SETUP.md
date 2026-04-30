@@ -137,6 +137,8 @@ Recommended team workflow:
 7. Merge to `main`.
 8. Render deploys production.
 
+Pushing to `main-redesign` is safe for development checks because it runs CI without deploying production.
+
 ## Useful Docker Commands
 
 Build image only:
